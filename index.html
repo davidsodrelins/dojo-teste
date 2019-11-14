@@ -1,18 +1,54 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Dojo</title>
 </head>
+
 <body>
-<h2>Dojô de Teste! It is time!!!</h2>
-<input type="text" id="meucampo">
-<input type="button" id="meubutton" onclick="minhafunc()" value="EXIBIR">
+    <h2>Dojô de Teste! It is time!!!</h2>
+    <input type="number" onblur="validaValor(this.value)" maxlength="2" max="10" min="0" id="n1">
+    <input type="number" onblur="validaValor(this.value)" maxlength="2" max="10" min="0" id="n2">
+    <input type="number" onblur="validaValor(this.value)" maxlength="2" max="10" min="0" id="n3">
+    <input type="number" onblur="validaValor(this.value)" maxlength="2" max="10" min="0" id="n4">
+    <input type="number" disabled id="mediaAluno">
+    <input type="button" id="meubutton" onclick="media()" value="CALCULAR">
 
 </body>
 <script>
-    var valorInput = document.getElementById("meucampo");
-    function minhafunc(){
-        alert("O usuario digitou " + valorInput.value);
+    document.getElementById("meubutton").style.display = "none";
+    function media() {
+        var n1 = parseFloat(document.getElementById("n1").value);
+        var n2 = parseFloat(document.getElementById("n2").value);
+        var n3 = parseFloat(document.getElementById("n3").value);
+        var n4 = parseFloat(document.getElementById("n4").value);
+        var mediaAluno = document.getElementById("mediaAluno");
+
+        if ((validaValor(n1)) ||
+            (validaValor(n2)) ||
+            (validaValor(n3)) ||
+            (validaValor(n4))) {
+            mediaAluno.value = (n1 + n2 + n3 + n4) / 4;
+            console.log(mediaAluno.value);
+        } else {
+            alert("Não foi possível calcular a média.");
+        }
+    };
+    function validaValor(valor) {
+        document.getElementById("meubutton").style.display = "none";
+        if ((valor < 0) || (valor > 10)) {
+            alert("Valor inválido. Todas as notas serão redefinidas.");
+            document.getElementById("n1").value = "";
+            document.getElementById("n2").value = "";
+            document.getElementById("n3").value = "";
+            document.getElementById("n4").value = "";
+            document.getElementById("mediaAluno").value = "";
+            return false;
+        } else {
+            document.getElementById("meubutton").style.display = "block";
+            return true;
+        }
     }
 </script>
+
 </html>
